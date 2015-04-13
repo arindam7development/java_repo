@@ -22,15 +22,15 @@ public class ReflectApp{
 		Class cls = Class.forName("org.arindam.reflection.AppTest");
 		Object obj = cls.newInstance();
  
-		//call the printIt method
+		//call the print method
 		Method method = cls.getDeclaredMethod("print", noparams);
 		method.invoke(obj, null);
  
-		//call the printItString method, pass a String param 
+		//call the printString method, pass a String param 
 		method = cls.getDeclaredMethod("printString", paramString);
 		method.invoke(obj, new String("arindam"));
  
-		//call the printItInt method, pass a int param
+		//call the printInt method, pass a int param
 		method = cls.getDeclaredMethod("printInt", paramInt);
 		method.invoke(obj, 1230);
  
