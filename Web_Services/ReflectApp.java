@@ -1,7 +1,7 @@
 package org.arindam.reflection;
 
 import java.lang.reflect.Method;
-// This Class uses Reflection to call java method of the class ReflectApp.java at runtime .
+// This Class uses Reflection to call java method of the class AppTest.java at runtime .
 public class ReflectApp{
  
 	public static void main(String[] args) {
