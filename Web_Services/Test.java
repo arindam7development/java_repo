@@ -12,6 +12,17 @@ import org.junit.Test;
 
 public class Test {
  
+  static class ExpensiveManagedResource implements Closeable {
+    @Override
+    public void close() throws IOException {}
+  }
+
+  static class ManagedResource implements Closeable {
+    @Override
+    public void close() throws IOException {}
+  }
+
+ 
   @BeforeClass
   public static void setUpClass() {
     System.out.println("@BeforeClass setUpClass");
