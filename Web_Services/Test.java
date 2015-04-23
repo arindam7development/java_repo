@@ -55,6 +55,14 @@ public class Test {
     this.myManagedResource.close();
     this.myManagedResource = null;
   }
+ @Test
+  public void test1() {
+    this.println("@Test test1()");
+  }
 
+  @Test
+  public void test2() {
+    this.println("@Test test2()");
+  }
  
 }
