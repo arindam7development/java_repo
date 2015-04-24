@@ -42,9 +42,11 @@ public class Test {
   private void println(String string) {
     System.out.println(string);
   }
-
-  
-
+@Before
+  public void setUp() {
+    this.println("@Before setUp");
+    this.myManagedResource = new ManagedResource();
+  }
   @After
   public void tearDown() throws IOException {
     this.println("@After tearDown");
