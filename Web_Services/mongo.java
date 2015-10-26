@@ -48,6 +48,23 @@ public class App {
 
             Helper.prettyPrintJSON(d);
         }*/
+        
+         List<Double> home_work =null;
+        int count = 0 ;
+        for (int i = 0; i <= myDocs.size(); i++) {
+            //System.out.println("#"+i+"#"+myDocs.get(i).getDouble("student_id"));
+            Double stu_id = myDocs.get(i).getDouble("student_id");
+            for (int j = 1; j <= myDocs.size(); j++){
+                if(myDocs.get(i).getDouble("student_id")==myDocs.get(j).getDouble("student_id")){
+                    count=count+1;
+                }
+            }
+
+
+        }
+        
+        
+        
        MongoCursor<Document> cursor = collection.find(filter).iterator();
        // System.out.println(myDocs.size());
         try{
