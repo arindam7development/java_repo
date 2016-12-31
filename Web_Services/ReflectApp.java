@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 // This Class uses Reflection to call java method of the class AppTest.java at runtime .
 public class ReflectApp{
  
-	public static void main(String[] args1) {
+	public static void main(String[] args) {
  
 	//no paramater
 	Class noparams[] = {};
