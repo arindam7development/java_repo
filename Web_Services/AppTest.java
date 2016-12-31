@@ -8,7 +8,7 @@ public class AppTest{
 		System.out.println("print() no param");
 	}
  
-	public void printString(String temp){
+	public void printString(String temp1){
 		System.out.println("printString() with param String : " + temp);
 	}
  
