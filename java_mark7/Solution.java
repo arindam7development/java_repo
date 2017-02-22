@@ -15,7 +15,7 @@ public class Solution {
         t=sc.nextInt();
         
         for(int i=0; i<t; i++){
-             s= 0.0;
+            double s= 0.0;
             s=sc.nextInt();
             s=s*s;
             System.out.println(0.570795*s);
