@@ -1,0 +1,37 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexOne {
+
+    public static void main(String args[])
+    {
+        String theText = "bright-red paint get-that car phone-oneplus6";
+        String regex = "\\w+\\-\\w{3,10}+\\d*";
+
+        Pattern compilePattern = Pattern.compile(regex);
+
+        /*String[] collection = theText.split(regex);
+        System.out.println(collection.length);
+        if(resultComputer.find())
+        {
+            System.out.println("the result:"+resultComputer.group());
+        }
+        for(String s : collection)
+        {
+            System.out.println("a"+s);
+        }*/
+
+        String[] theSegregated = theText.split(" ");
+        System.out.println(theSegregated.length);
+        for(String s : theSegregated)
+        {
+            Matcher m = compilePattern.matcher(s);
+            if(m.matches())
+            {
+                System.out.println(s);
+            }
+        }
+    }
+
+
+}
