@@ -1,0 +1,28 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegxTwo {
+
+    public static void main(String args[])
+    {
+        String theText = "theBright-red, paint, car, red-car: phone-oneplus6";
+        String [] theStrings = theText.split(", *|: *");
+        System.out.println("size"+theStrings.length);
+        for(String s : theStrings)
+        {
+            System.out.println("the elements"+s);
+        }
+        String regex = "\\w*-\\w*";
+        Pattern thePattern = Pattern.compile(regex);
+        for(String s : theStrings)
+        {
+            Matcher matchIt = thePattern.matcher(s);
+            if(matchIt.matches())
+            {
+                System.out.println(s);
+            }
+        }
+
+    }
+
+}
