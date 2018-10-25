@@ -20,62 +20,76 @@ public class TinyUrl {
         String[] strLong = longUrl.replaceFirst("^https://|/","").split(regex,-1);
         String shortUrl = "http://tinyurl.com/4e9iAk";
         String[] strShort = shortUrl.replaceFirst("^http://|/","").split(regexShort,-1);
-
-        StringBuilder sb = new StringBuilder("http://");
-        int i=0;
-        for(String s : strLong){
-            if(i==0){
-                directory.put(s,strShort[0]);
-                sb.append(directory.get(s));
-                sb.append("/");
-            }else {
-                directory.put(s,strShort[1]);
-                if(i==1){
+        String ifHttp = longUrl.substring(0,5);
+        String finalResult = null;
+        if(ifHttp.equals("http:")){
+            finalResult = longUrl;
+        }
+        else {
+            StringBuilder sb = new StringBuilder("http://");
+            int i=0;
+            for(String s : strLong){
+                if(i==0){
+                    directory.put(s,strShort[0]);
                     sb.append(directory.get(s));
+                    sb.append("/");
+                }else {
+                    directory.put(s,strShort[1]);
+                    if(i==1){
+                        sb.append(directory.get(s));
+                    }
                 }
+                i=i+1;
             }
-            i=i+1;
+            finalResult = sb.toString();
         }
-      return sb.toString();
-    }
-
-    public static String decode (String shortUrl){
-
-        String[] shortElements = shortUrl.replaceFirst("^http://|/","").split("http://|/");
-        StringBuilder sb  = new StringBuilder("https://");
-        Map<String, ArrayList<String>> buffer = new LinkedHashMap<>();
-
-        for(Map.Entry<String,String> temp : directory.entrySet()){
-
-            if(!buffer.containsKey(temp.getValue())){
-                ArrayList<String> tempBuffer = new ArrayList<>();
-                tempBuffer.add(temp.getKey());
-                buffer.put(temp.getValue(),tempBuffer);
-            }
-            else {
-               ArrayList<String> tempList =  buffer.get(temp.getValue());
-               tempList.add(temp.getKey());
-                buffer.put(temp.getValue(),tempList);
-            }
-        }
-
-       for(String s : shortElements){
-            if(buffer.get(s)!=null){
-
-                 for(int i=0; i<buffer.get(s).size();i++){
-                     sb.append(buffer.get(s).get(i));
-                     sb.append("/");
-                 }
-            }
-       }
-
-       String finalResult = sb.toString();
-       if(finalResult.charAt(finalResult.length()-1)=='/'){
-           finalResult = finalResult.substring(0, finalResult.length()-1);
-       }
-
 
         return finalResult;
     }
+
+    public static String decode (String shortUrl){
+        String[] shortElements = shortUrl.replaceFirst("^http://|/","").split("http://|/");
+        StringBuilder sb  = new StringBuilder("https://");
+        Map<String, ArrayList<String>> buffer = new LinkedHashMap<>();
+        String ifHttp = shortUrl.substring(0,5);
+        String decoded = null;
+        if(ifHttp.equals("http:")){
+            decoded = shortUrl;
+        }
+        else {
+            for(Map.Entry<String,String> temp : directory.entrySet()){
+
+                if(!buffer.containsKey(temp.getValue())){
+                    ArrayList<String> tempBuffer = new ArrayList<>();
+                    tempBuffer.add(temp.getKey());
+                    buffer.put(temp.getValue(),tempBuffer);
+                }
+                else {
+                    ArrayList<String> tempList =  buffer.get(temp.getValue());
+                    tempList.add(temp.getKey());
+                    buffer.put(temp.getValue(),tempList);
+                }
+            }
+
+            for(String s : shortElements){
+                if(buffer.get(s)!=null){
+
+                    for(int i=0; i<buffer.get(s).size();i++){
+                        sb.append(buffer.get(s).get(i));
+                        sb.append("/");
+                    }
+                }
+            }
+
+            String finalResult = sb.toString();
+            if(finalResult.charAt(finalResult.length()-1)=='/'){
+                finalResult = finalResult.substring(0, finalResult.length()-1);
+            }
+
+            decoded = finalResult;
+        }
+
+        return decoded;
+      }
 
 }
